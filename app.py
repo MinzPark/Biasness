@@ -12,8 +12,8 @@ st.markdown(
     '''
     <style>
     /* 사이드바 전체 너비 */
-    [data-testid="stSidebar"] { min-width: 400px !important; }
-    [data-testid="stSidebarNav"] > div:first-child { width: 400px !important; }
+    [data-testid="stSidebar"] { min-width: 300px !important; }
+    [data-testid="stSidebarNav"] > div:first-child { width: 300px !important; }
     /* 사이드바 내용 폰트 크기 조절 */
     [data-testid="stSidebar"] p, 
     [data-testid="stSidebar"] label,
@@ -28,7 +28,7 @@ st.markdown(
 
 st.title("The Example of Biased Estimator under Poisson Regression")
 
-st.sidebar.markdown("<h2 style='font-size:40px; margin-bottom: 1rem;'>Parameters</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<h2 style='font-size:30px; margin-bottom: 1rem;'>Parameters</h2>", unsafe_allow_html=True)
 
 # 사이드바에서 조정 가능한 시드, 샘플 수, 회귀 파라미터
 seed = st.sidebar.number_input("Random seed", value=0, step=1)
