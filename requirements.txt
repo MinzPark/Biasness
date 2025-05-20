@@ -1,0 +1,5 @@
+streamlit
+numpy
+statsmodels
+scipy
+plotly
