@@ -11,6 +11,12 @@ st.set_page_config(layout="wide")
 st.markdown(
     '''
     <style>
+    /* 사이드바 왼쪽 여백 제거 */
+    section[data-testid="stSidebar"] {
+        padding-left: 0rem !important;
+        margin-left: 0rem !important;
+    }
+    
     /* 사이드바 전체 너비 */
     [data-testid="stSidebar"] { min-width: 200px !important; max-width: 200px !important; }
     [data-testid="stSidebarNav"] > div:first-child { width: 200px !important; }
