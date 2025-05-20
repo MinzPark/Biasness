@@ -20,7 +20,7 @@ st.markdown(
     /* 사이드바 내부 내용 패딩 제거 */
     section[data-testid="stSidebar"] > div:first-child {
         padding: 0rem !important;
-        min-width: 180px !important; max-width: 180px !important;
+        min-width: 200px !important; max-width: 200px !important;
     }
 
     /* 본문 block-container의 왼쪽 패딩 제거 → 사이드바와 붙음 */
@@ -29,8 +29,7 @@ st.markdown(
         padding-right: 1rem !important;
     }
     /* 사이드바 전체 너비 */
-    /*[data-testid="stSidebar"] { min-width: 200px !important; max-width: 200px !important; }*/
-    [data-testid="stSidebarNav"] > div:first-child { width: 200px !important; }
+    [data-testid="stSidebarNav"] > div:first-child { width: 180px !important; }
     /* 사이드바 내용 폰트 크기 조절 */
     [data-testid="stSidebar"] p, 
     [data-testid="stSidebar"] label,
