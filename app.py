@@ -155,7 +155,7 @@ fig1.update_layout(
         aspectratio=dict(x=1, y=1, z=0.5),
         camera=dict(eye=dict(x=1.5, y=1.2, z=0.8))
     ),
-    margin=dict(l=0, r=0, t=0, b=0), width=800, height=600,
+    margin=dict(l=0, r=0, t=0, b=0), width=700, height=600,
     legend=dict(
             x=0.95,           # paper 좌우 기준(0~1)에서 우측 95%
             y=0.9,           # paper 상하 기준(0~1)에서 위쪽 95%
@@ -198,7 +198,7 @@ fig2.update_layout(
         aspectratio=dict(x=1, y=1, z=0.5)
     ),
     margin=dict(l=0, r=0, t=0, b=0), 
-    width=800, height=600
+    width=700, height=600
 )
 
 # ──────────────────────────────────────────────────────
