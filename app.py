@@ -19,7 +19,7 @@ st.markdown(
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] .stSlider label,
     [data-testid="stSidebar"] .stNumberInput label {
-        font-size: 20px !important;
+        font-size: 15px !important;
     }
     </style>
     ''', unsafe_allow_html=True
@@ -155,7 +155,7 @@ fig1.update_layout(
         aspectratio=dict(x=1, y=1, z=0.5),
         camera=dict(eye=dict(x=1.5, y=1.2, z=0.8))
     ),
-    margin=dict(l=0, r=0, t=0, b=0), width=900, height=900,
+    margin=dict(l=0, r=0, t=0, b=0), width=800, height=600,
     legend=dict(
             x=0.95,           # paper 좌우 기준(0~1)에서 우측 95%
             y=0.9,           # paper 상하 기준(0~1)에서 위쪽 95%
@@ -163,7 +163,7 @@ fig1.update_layout(
             yanchor='top',    # y=0.95 지점을 legend 상단에 맞춤
             bgcolor='rgba(255,255,255,0.5)',  # 배경 반투명
             borderwidth=0,
-            font=dict(size=20),  # legend 텍스트 크기
+            font=dict(size=15),  # legend 텍스트 크기
             itemsizing='constant',  # itemwidth를 고정 사이즈로 사용
             itemwidth=60            # 각 legend item 너비(px)
         )
@@ -198,7 +198,7 @@ fig2.update_layout(
         aspectratio=dict(x=1, y=1, z=0.5)
     ),
     margin=dict(l=0, r=0, t=0, b=0), 
-    width=900, height=900
+    width=800, height=600
 )
 
 # ──────────────────────────────────────────────────────
