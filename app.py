@@ -12,7 +12,7 @@ st.markdown(
     '''
     <style>
     /* 사이드바 전체 너비 */
-    [data-testid="stSidebar"] { min-width: 200px !important; }
+    [data-testid="stSidebar"] { min-width: 200px !important; max-width: 200px !important; }
     [data-testid="stSidebarNav"] > div:first-child { width: 200px !important; }
     /* 사이드바 내용 폰트 크기 조절 */
     [data-testid="stSidebar"] p, 
