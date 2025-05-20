@@ -52,7 +52,7 @@ st.markdown(
         padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
     }
     /* 사이드바 전체 너비 */
-    [data-testid="stSidebarNav"] > div:first-child { width: 180px !important; }
+    [data-testid="stSidebarNav"] > div:first-child { width: 200px !important; }
     /* 사이드바 내용 폰트 크기 조절 */
     [data-testid="stSidebar"] p, 
     [data-testid="stSidebar"] label,
