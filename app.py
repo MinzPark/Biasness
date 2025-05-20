@@ -63,7 +63,7 @@ st.markdown(
 
     /* 본문 block-container 여백 줄이기: 사이드바와 거의 붙도록 */
     div.block-container {
-        padding-left: 0.5rem !important;
+        padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
 
