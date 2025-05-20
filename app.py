@@ -9,29 +9,47 @@ st.set_page_config(layout="wide")
 # 사이드바 너비 조정 (px 단위)
 
 st.markdown(
-    '''
+    """
     <style>
-    /* 사이드바 왼쪽 여백 제거 */
+    /* 사이드바 너비를 200px로 고정 */
     section[data-testid="stSidebar"] {
-        padding-left: 0rem !important;
-        margin-left: 0rem !important;
-    }
-    
-    /* 사이드바 내부 내용 패딩 제거 */
-    section[data-testid="stSidebar"] > div:first-child {
+        width: 200px !important;
+        min-width: 200px !important;
+        max-width: 200px !important;
         padding: 0rem !important;
-        min-width: 200px !important; max-width: 200px !important;
+        margin: 0rem !important;
     }
-    /* 슬라이더 막대가 넘치지 않게 막대 길이 강제 제한 */
+
+    /* 슬라이더 wrapper 크기 제한 */
+    div[data-testid="stSlider"] {
+        width: 180px !important;  /* 사이드바 안쪽 padding 고려해 조금 작게 */
+        padding: 0rem !important;
+        margin: 0rem !important;
+    }
+
+    /* 슬라이더 바(빨간 막대) 포함 영역 */
     div[data-testid="stSlider"] > div {
-        flex-grow: 1 !important;
+        width: 100% !important;
+        margin: 0rem !important;
+        padding: 0rem !important;
+    }
+
+    /* 막대 그래픽(svg)도 최대 길이 제한 */
+    div[data-testid="stSlider"] svg {
+        width: 100% !important;
         max-width: 100% !important;
     }
+
 
     /* 본문 block-container의 왼쪽 패딩 제거 → 사이드바와 붙음 */
     div.block-container {
         padding-left: 0.5rem !important;  /* 최소한의 여백만 남기기 */
         padding-right: 1rem !important;
+    }
+
+    /* 사이드바 내부 패딩 조절 */
+    section[data-testid="stSidebar"] > div:first-child {
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
     }
     /* 사이드바 전체 너비 */
     [data-testid="stSidebarNav"] > div:first-child { width: 180px !important; }
@@ -42,9 +60,13 @@ st.markdown(
     [data-testid="stSidebar"] .stNumberInput label {
         font-size: 15px !important;
     }
+
+    
     </style>
-    ''', unsafe_allow_html=True
+    """,
+    unsafe_allow_html=True
 )
+
 
 
 st.title("The Example of Biased Estimator under Poisson Regression")
