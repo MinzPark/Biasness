@@ -22,10 +22,10 @@ st.markdown(
         padding: 0rem !important;
         min-width: 200px !important; max-width: 200px !important;
     }
-    .stSlider {
-        padding-right: 0rem !important;
-        margin-right: 0rem !important;
-        width: 100% !important;
+    /* 슬라이더 막대가 넘치지 않게 막대 길이 강제 제한 */
+    div[data-testid="stSlider"] > div {
+        flex-grow: 1 !important;
+        max-width: 100% !important;
     }
 
     /* 본문 block-container의 왼쪽 패딩 제거 → 사이드바와 붙음 */
