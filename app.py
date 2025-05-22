@@ -7,49 +7,21 @@ from scipy.stats import gaussian_kde, norm
 st.set_page_config(layout="wide")
 # 사이드바 너비 조정 (px 단위)
 
-# st.markdown(
-#     '''
-#     <style>
-#     /* 사이드바 전체 너비 */
-#     [data-testid="stSidebar"] { min-width: 100px !important; }
-#     [data-testid="stSidebarNav"] > div:first-child { width: 100px !important; }
-#     /* 사이드바 내용 폰트 크기 조절 */
-#     [data-testid="stSidebar"] p, 
-#     [data-testid="stSidebar"] label,
-#     [data-testid="stSidebar"] .stSlider label,
-#     [data-testid="stSidebar"] .stNumberInput label {
-#         font-size: 20px !important;
-#     }
-#     </style>
-#     ''', unsafe_allow_html=True
-# )
-
 st.markdown(
-    """
+    '''
     <style>
-      /* 페이지 전체 block-container 여백 제거 */
-      .block-container {
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      /* Streamlit 기본 보고서 뷰(Report view) 마진 제거 */
-      .reportview-container .main .block-container {
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      /* 사이드바 컨테이너 여백 최소화 */
-      [data-testid="stSidebar"] {
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-      /* 플롯ly 컨테이너도 꽉 차도록 */
-      .stPlotlyChart > div {
-        padding: 0 !important;
-        margin: 0 !important;
-      }
+    /* 사이드바 전체 너비 */
+    [data-testid="stSidebar"] { min-width: 100px !important; }
+    [data-testid="stSidebarNav"] > div:first-child { width: 100px !important; }
+    /* 사이드바 내용 폰트 크기 조절 */
+    [data-testid="stSidebar"] p, 
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] .stSlider label,
+    [data-testid="stSidebar"] .stNumberInput label {
+        font-size: 20px !important;
+    }
     </style>
-    """,
-    unsafe_allow_html=True,
+    ''', unsafe_allow_html=True
 )
 
 
