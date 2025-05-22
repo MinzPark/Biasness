@@ -274,14 +274,14 @@ fig1.data[-1].showlegend = False
 y_min, y_max = y.min(), y.max()
 y_grid2 = np.linspace(y_min, y_max, 100)
 Xg, Yg = np.meshgrid(x_line, y_grid2)
-Mu = np.tile(mu_line, (y_grid2.size, 1))
+Mu = np.tile(mu_true_line, (y_grid2.size, 1))
 Sigma = np.sqrt(Mu)
 pdf = norm.pdf(Yg, loc=Mu, scale=Sigma)
-# scale2 = mu_line.max() * 0.3
+# scale2 = mu_true_line.max() * 0.3
 
 fig2 = go.Figure()
 fig2.add_trace(go.Scatter3d(
-    x=x_line, y=mu_line, z=np.zeros_like(x_line),
+    x=x_line, y=mu_true_line, z=np.zeros_like(x_line),
     mode='lines', line=dict(color='orange', width=4),
     name='Regression μ(x)'
 ))
