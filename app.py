@@ -6,32 +6,54 @@ from scipy.stats import gaussian_kde, norm
 
 st.set_page_config(layout="wide")
 # 사이드바 너비 조정 (px 단위)
+
 # st.markdown(
 #     '''
 #     <style>
-#     /* 사이드바 전체 최소 너비 설정 */
-#     [data-testid="stSidebar"] {
-#         min-width: 500px !important;
-#     }
-#     /* 사이드바 내비게이션 내부 너비 지정 */
-#     [data-testid="stSidebarNav"] > div:first-child {
-#         width: 500px !important;
+#     /* 사이드바 전체 너비 */
+#     [data-testid="stSidebar"] { min-width: 100px !important; }
+#     [data-testid="stSidebarNav"] > div:first-child { width: 100px !important; }
+#     /* 사이드바 내용 폰트 크기 조절 */
+#     [data-testid="stSidebar"] p, 
+#     [data-testid="stSidebar"] label,
+#     [data-testid="stSidebar"] .stSlider label,
+#     [data-testid="stSidebar"] .stNumberInput label {
+#         font-size: 20px !important;
 #     }
 #     </style>
 #     ''', unsafe_allow_html=True
 # )
+
 st.markdown(
     '''
     <style>
-    /* 사이드바 전체 너비 */
-    [data-testid="stSidebar"] { min-width: 100px !important; }
-    [data-testid="stSidebarNav"] > div:first-child { width: 100px !important; }
-    /* 사이드바 내용 폰트 크기 조절 */
-    [data-testid="stSidebar"] p, 
+    /* 사이드바 전체 너비 조정 */
+    [data-testid="stSidebar"] {
+        min-width: 100px !important;
+        padding: 0rem !important;
+        margin: 0rem !important;
+    }
+
+    [data-testid="stSidebarNav"] > div:first-child {
+        width: 100px !important;
+        padding: 0rem !important;
+        margin: 0rem !important;
+    }
+
+    /* 사이드바 내부 요소 마진 제거 */
+    [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] .stSlider label,
     [data-testid="stSidebar"] .stNumberInput label {
         font-size: 20px !important;
+        margin: 0rem !important;
+        padding: 0rem !important;
+    }
+
+    /* 모든 div 태그에 대해 패딩 제거 */
+    [data-testid="stSidebar"] div {
+        padding: 0rem !important;
+        margin: 0rem !important;
     }
     </style>
     ''', unsafe_allow_html=True
