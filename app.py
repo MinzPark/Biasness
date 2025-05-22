@@ -20,6 +20,14 @@ st.markdown(
     [data-testid="stSidebar"] .stNumberInput label {
         font-size: 20px !important;
     }
+    @media only screen and (max-width: 480px) {
+      .block-container {
+        padding: 0.5rem !important;
+      }
+      .stPlotlyChart > div {
+        height: 50vh !important;
+      }
+    }
     </style>
     ''', unsafe_allow_html=True
 )
@@ -159,8 +167,9 @@ fig1.update_layout(
             font=dict(size=10),  # legend 텍스트 크기
             itemsizing='constant',  # itemwidth를 고정 사이즈로 사용
             itemwidth=50            # 각 legend item 너비(px)
-        )
+        ),
 )
+
 
 fig1.data[-1].showlegend = False
 
@@ -202,8 +211,8 @@ fig2.update_layout(
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("<h3 style='text-align:center'>Biased Estimator vs Real Density of target</h3>", unsafe_allow_html=True)
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig1, use_container_width=True, config={"responsive": True}
 with col2:
     st.markdown("<h3 style='text-align:center'>Unbiased Estimator</h3>", unsafe_allow_html=True)
     # st.subheader("Unbiased Estimator")
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, use_container_width=True, config={"responsive": True}
