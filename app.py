@@ -41,207 +41,113 @@ st.sidebar.markdown("<h2 style='font-size:30px; margin-bottom: 1rem;'>Parameters
 
 
 
-# # 1) 데이터 생성 & Poisson GLM fitting
-# np.random.seed(int(0))
-# N = 100
-# x = np.random.uniform(0, 10, N)
-# beta0, beta1 = 0.5, 0.3
-# mu_true = np.exp(beta0 + beta1 * x)
-# y = np.random.poisson(mu_true)
-# # 2) 기본 회귀선 x축
-# x_line = np.linspace(x.min(), x.max(), 100)
-
-
-
-
-# fig1 = go.Figure()
-
-# # 3.1 관측점
-# fig1.add_trace(go.Scatter3d(
-#     x=x, y=y, z=np.zeros_like(y),
-#     mode='markers',
-#     marker=dict(size=2, color='blue', opacity=0.3),
-#     name='Observations'
-# ))
-
-# # 3.2 KDE ridgeline 시각화
-# n_ridges = 4
-# x_ridg = np.linspace(x.min(), x.max(), n_ridges)
-
-# for xi in x_ridg:
-#     mu_sample = np.exp(beta0 + beta1 * xi)
-#     y_sample = np.random.normal(loc=mu_sample, scale=mu_sample * 0.7, size=10000)
-
-#     kde_sample = gaussian_kde(y_sample)
-#     y_sample_grid = np.linspace(y_sample.min(), y_sample.max(), 200)
-#     dens_sample = kde_sample(y_sample_grid)
-
-#     Xp_sample = np.full((2, y_sample_grid.size), xi)
-#     Yp_sample = np.vstack([y_sample_grid, y_sample_grid])
-#     Zp_sample = np.vstack([np.zeros_like(dens_sample), dens_sample])
-
-#     fig1.add_trace(go.Surface(
-#         x=Xp_sample,
-#         y=Yp_sample,
-#         z=Zp_sample,
-#         surfacecolor=Zp_sample,
-#         colorscale='Blues',
-#         cmin=0,
-#         cmax=dens_sample.max(),
-#         showscale=False,
-#         opacity=0.5,
-#         showlegend=False
-#     ))
-
-#     # peak 표시
-#     idx_max = np.argmax(dens_sample)
-#     y_peak = y_sample_grid[idx_max]
-#     z_peak = dens_sample[idx_max]
-
-#     fig1.add_trace(go.Scatter3d(
-#         x=[xi], y=[y_peak], z=[z_peak],
-#         mode='markers', marker=dict(size=2, color='blue'),
-#         showlegend=False
-#     ))
-
-#     fig1.add_trace(go.Scatter3d(
-#         x=[xi, xi], y=[y_peak, y_peak], z=[0, z_peak],
-#         mode='lines',
-#         line=dict(color='blue', width=3, dash='solid'),
-#         showlegend=False
-#     ))
-
-
-# # ---------------------
-# # 슬라이더: bias 조절 (0 = 무편향, 1 = 높은 편향)
-# # ---------------------
-# # 1) 파라미터
-# bias = st.sidebar.slider("Bias (0 = 없음, 0.5 = 매우 큼)", 0.0, 0.1, 0.1, 0.01)
-# min_n, max_n = 5, 100
-
-# t = 1- (bias / 0.1)
-# n = int( min_n * (max_n/min_n)**t )
-
-# # ---------------------
-# # 4) GLM 모델 피팅 & 회귀선 시각화
-# # ---------------------
-# idx = np.random.choice(len(x), size=n, replace=True)
-# X_sample = sm.add_constant(x[idx])
-# y_sample = y[idx]
-# res = sm.GLM(y_sample, X_sample, family=sm.families.Poisson()).fit()
-# mu_line = res.predict(sm.add_constant(x_line))
-
-# fig1.add_trace(go.Scatter3d(
-#     x=x_line, y=mu_line, z=np.zeros_like(x_line),
-#     mode='lines',
-#     line=dict(color='orange', width=4),
-#     name='GLM μ(x)'
-# ))
-
-# # ---------------------
-# # 5) 정답 회귀선도 같이 그림
-# # ---------------------
-# mu_true_line = np.exp(beta0 + beta1 * x_line)
-# fig1.add_trace(go.Scatter3d(
-#     x=x_line, y=mu_true_line, z=np.zeros_like(x_line),
-#     mode='lines',
-#     line=dict(color='red', width=4, dash='dot')
-# ))
-
-np.random.seed(0)
+# 1) 데이터 생성 & Poisson GLM fitting
+np.random.seed(int(0))
 N = 100
 x = np.random.uniform(0, 10, N)
 beta0, beta1 = 0.5, 0.3
 mu_true = np.exp(beta0 + beta1 * x)
 y = np.random.poisson(mu_true)
+# 2) 기본 회귀선 x축
 x_line = np.linspace(x.min(), x.max(), 100)
 
-# 2) 슬라이더 → n 계산
-bias = st.sidebar.slider("Bias (0 = 없음, 0.1 = 매우 큼)", 0.0, 0.1, 0.1, 0.01)
-min_n, max_n = 5, 100
-t = 1 - (bias / 0.1)
-n = int(min_n * (max_n / min_n) ** t)
-st.sidebar.markdown(f"**샘플 수 n = {n}**")
 
-# 3) ridgeline + 관측점 한번만 그리는 함수 (캐시)
-@st.cache_data
-def build_base_fig(x, y, beta0, beta1):
-    fig = go.Figure()
-    # Observations
-    fig.add_trace(go.Scatter3d(
-        x=x, y=y, z=np.zeros_like(y),
-        mode='markers',
-        marker=dict(size=2, color='blue', opacity=0.3),
-        name='Observations'
+
+
+fig1 = go.Figure()
+
+# 3.1 관측점
+fig1.add_trace(go.Scatter3d(
+    x=x, y=y, z=np.zeros_like(y),
+    mode='markers',
+    marker=dict(size=2, color='blue', opacity=0.3),
+    name='Observations'
+))
+
+# 3.2 KDE ridgeline 시각화
+n_ridges = 4
+x_ridg = np.linspace(x.min(), x.max(), n_ridges)
+
+for xi in x_ridg:
+    mu_sample = np.exp(beta0 + beta1 * xi)
+    y_sample = np.random.normal(loc=mu_sample, scale=mu_sample * 0.7, size=10000)
+
+    kde_sample = gaussian_kde(y_sample)
+    y_sample_grid = np.linspace(y_sample.min(), y_sample.max(), 200)
+    dens_sample = kde_sample(y_sample_grid)
+
+    Xp_sample = np.full((2, y_sample_grid.size), xi)
+    Yp_sample = np.vstack([y_sample_grid, y_sample_grid])
+    Zp_sample = np.vstack([np.zeros_like(dens_sample), dens_sample])
+
+    fig1.add_trace(go.Surface(
+        x=Xp_sample,
+        y=Yp_sample,
+        z=Zp_sample,
+        surfacecolor=Zp_sample,
+        colorscale='Blues',
+        cmin=0,
+        cmax=dens_sample.max(),
+        showscale=False,
+        opacity=0.5,
+        showlegend=False
     ))
 
-    # KDE ridgeline
-    n_ridges = 4
-    x_ridg = np.linspace(x.min(), x.max(), n_ridges)
-    dx = (x.max() - x.min()) / n_ridges
-    for xi in x_ridg:
-        mu_s = np.exp(beta0 + beta1 * xi)
-        # (원하시면 샘플 수나 grid 개수를 줄이세요)
-        y_samp = np.random.normal(mu_s, mu_s * 0.7, 5000)
-        kde = gaussian_kde(y_samp)
-        yg = np.linspace(y_samp.min(), y_samp.max(), 100)
-        dens = kde(yg)
-        dens = dens / dens.max() * dx * 0.8
+    # peak 표시
+    idx_max = np.argmax(dens_sample)
+    y_peak = y_sample_grid[idx_max]
+    z_peak = dens_sample[idx_max]
 
-        Xp = np.full((2, yg.size), xi)
-        Yp = np.vstack([yg, yg])
-        Zp = np.vstack([np.zeros_like(dens), dens])
+    fig1.add_trace(go.Scatter3d(
+        x=[xi], y=[y_peak], z=[z_peak],
+        mode='markers', marker=dict(size=2, color='blue'),
+        showlegend=False
+    ))
 
-        fig.add_trace(go.Surface(
-            x=Xp, y=Yp, z=Zp,
-            surfacecolor=Zp, colorscale='Blues',
-            showscale=False, opacity=0.5,
-            showlegend=False
-        ))
+    fig1.add_trace(go.Scatter3d(
+        x=[xi, xi], y=[y_peak, y_peak], z=[0, z_peak],
+        mode='lines',
+        line=dict(color='blue', width=3, dash='solid'),
+        showlegend=False
+    ))
 
-        idxm = np.argmax(dens)
-        fig.add_trace(go.Scatter3d(
-            x=[xi], y=[yg[idxm]], z=[dens[idxm]],
-            mode='markers',
-            marker=dict(size=2, color='blue'),
-            showlegend=False
-        ))
-        fig.add_trace(go.Scatter3d(
-            x=[xi, xi], y=[yg[idxm], yg[idxm]], z=[0, dens[idxm]],
-            mode='lines',
-            line=dict(color='blue', width=3),
-            showlegend=False
-        ))
 
-    # camera 고정
-    fig.update_layout(scene=dict(camera=dict(eye=dict(x=1.5, y=1.2, z=0.8))))
-    return fig
+# ---------------------
+# 슬라이더: bias 조절 (0 = 무편향, 1 = 높은 편향)
+# ---------------------
+# 1) 파라미터
+bias = st.sidebar.slider("Bias (0 = 없음, 0.5 = 매우 큼)", 0.0, 0.1, 0.1, 0.01)
+min_n, max_n = 5, 100
 
-base_fig = build_base_fig(x, y, beta0, beta1)
+t = 1- (bias / 0.1)
+n = int( min_n * (max_n/min_n)**t )
 
-# 4) Base를 복제하고 오렌지 GLM 선만 추가
-fig1 = go.Figure(base_fig)
-
-# Poisson GLM 피팅
+# ---------------------
+# 4) GLM 모델 피팅 & 회귀선 시각화
+# ---------------------
 idx = np.random.choice(len(x), size=n, replace=True)
-res = sm.GLM(y[idx], sm.add_constant(x[idx]), family=sm.families.Poisson()).fit()
-mu_hat = res.predict(sm.add_constant(x_line))
+X_sample = sm.add_constant(x[idx])
+y_sample = y[idx]
+res = sm.GLM(y_sample, X_sample, family=sm.families.Poisson()).fit()
+mu_line = res.predict(sm.add_constant(x_line))
 
 fig1.add_trace(go.Scatter3d(
-    x=x_line, y=mu_hat, z=np.zeros_like(x_line),
+    x=x_line, y=mu_line, z=np.zeros_like(x_line),
     mode='lines',
     line=dict(color='orange', width=4),
     name='GLM μ(x)'
 ))
 
-# 5) true μ(x) 선은 범례에서 숨기기
+# ---------------------
+# 5) 정답 회귀선도 같이 그림
+# ---------------------
 mu_true_line = np.exp(beta0 + beta1 * x_line)
 fig1.add_trace(go.Scatter3d(
     x=x_line, y=mu_true_line, z=np.zeros_like(x_line),
     mode='lines',
-    line=dict(color='red', width=4, dash='dot'),
-    showlegend=False
+    line=dict(color='red', width=4, dash='dot')
 ))
+
 
 fig1.update_layout(
     scene=dict(
