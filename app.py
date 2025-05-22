@@ -10,6 +10,19 @@ st.set_page_config(layout="wide")
 st.markdown(
     '''
     <style>
+    @media only screen and (max-width: 600px) {
+      /* 1) 컬럼을 세로로 쌓기 */
+      div[data-testid="column"] {
+        width: 100% !important;
+        display: block !important;
+      }
+      /* 2) h3 헤더에 마진 추가 */
+      .stMarkdown h3 {
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
+        font-size: 1.2rem !important;
+      }
+    }
     /* 사이드바 전체 너비 */
     [data-testid="stSidebar"] { min-width: 100px !important; }
     [data-testid="stSidebarNav"] > div:first-child { width: 100px !important; }
@@ -19,14 +32,6 @@ st.markdown(
     [data-testid="stSidebar"] .stSlider label,
     [data-testid="stSidebar"] .stNumberInput label {
         font-size: 20px !important;
-    }
-    @media only screen and (max-width: 480px) {
-      .block-container {
-        padding: 0.5rem !important;
-      }
-      .stPlotlyChart > div {
-        height: 50vh !important;
-      }
     }
     </style>
     ''', unsafe_allow_html=True
