@@ -24,8 +24,8 @@ st.markdown(
     '''
     <style>
     /* 사이드바 전체 너비 */
-    [data-testid="stSidebar"] { min-width: 200px !important; }
-    [data-testid="stSidebarNav"] > div:first-child { width: 200px !important; }
+    [data-testid="stSidebar"] { min-width: 100px !important; }
+    [data-testid="stSidebarNav"] > div:first-child { width: 100px !important; }
     /* 사이드바 내용 폰트 크기 조절 */
     [data-testid="stSidebar"] p, 
     [data-testid="stSidebar"] label,
@@ -39,7 +39,7 @@ st.markdown(
 
 
 st.title("The Example of Biased Estimator under Poisson Regression")
-st.sidebar.markdown("<h2 style='font-size:40px; margin-bottom: 1rem;'>Parameters</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<h2 style='font-size:30px; margin-bottom: 1rem;'>Parameters</h2>", unsafe_allow_html=True)
 
 
 # ---------------------
@@ -65,7 +65,7 @@ fig1 = go.Figure()
 fig1.add_trace(go.Scatter3d(
     x=x, y=y, z=np.zeros_like(y),
     mode='markers',
-    marker=dict(size=3, color='blue', opacity=0.3),
+    marker=dict(size=2, color='blue', opacity=0.3),
     name='Observations'
 ))
 
@@ -105,14 +105,14 @@ for xi in x_ridg:
 
     fig1.add_trace(go.Scatter3d(
         x=[xi], y=[y_peak], z=[z_peak],
-        mode='markers', marker=dict(size=4, color='blue'),
+        mode='markers', marker=dict(size=2, color='blue'),
         showlegend=False
     ))
 
     fig1.add_trace(go.Scatter3d(
         x=[xi, xi], y=[y_peak, y_peak], z=[0, z_peak],
         mode='lines',
-        line=dict(color='blue', width=5, dash='solid'),
+        line=dict(color='blue', width=3, dash='solid'),
         showlegend=False
     ))
 
@@ -161,7 +161,7 @@ fig1.update_layout(
         aspectratio=dict(x=1, y=1, z=0.5),
         camera=dict(eye=dict(x=1.5, y=1.2, z=0.8))
     ),
-    margin=dict(l=0, r=0, t=0, b=0), width=900, height=900,
+    margin=dict(l=0, r=0, t=0, b=0), width=600, height=600,
     legend=dict(
             x=1,           # paper 좌우 기준(0~1)에서 우측 95%
             y=1,           # paper 상하 기준(0~1)에서 위쪽 95%
@@ -169,9 +169,9 @@ fig1.update_layout(
             yanchor='top',    # y=0.95 지점을 legend 상단에 맞춤
             bgcolor='rgba(255,255,255,0.5)',  # 배경 반투명
             borderwidth=0,
-            font=dict(size=20),  # legend 텍스트 크기
+            font=dict(size=10),  # legend 텍스트 크기
             itemsizing='constant',  # itemwidth를 고정 사이즈로 사용
-            itemwidth=60            # 각 legend item 너비(px)
+            itemwidth=50            # 각 legend item 너비(px)
         )
 )
 
@@ -207,7 +207,7 @@ fig2.update_layout(
         aspectratio=dict(x=1, y=1, z=0.5)
     ),
     margin=dict(l=0, r=0, t=0, b=0), 
-    width=900, height=900
+    width=600, height=600
 )
 
 # ──────────────────────────────────────────────────────
