@@ -220,6 +220,3 @@ with col2:
     st.markdown("<h3 style='text-align:center'>Unbiased Estimator</h3>", unsafe_allow_html=True)
     # st.subheader("Unbiased Estimator")
     st.plotly_chart(fig2, use_container_width=True)
-
-
------
