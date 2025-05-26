@@ -121,10 +121,10 @@ for xi in x_ridg:
 # 슬라이더: bias 조절 (0 = 무편향, 1 = 높은 편향)
 # ---------------------
 # 1) 파라미터
-bias = st.sidebar.slider("Bias (0 = 없음, 0.5 = 매우 큼)", 0.0, 0.1, 0.1, 0.01)
+bias = st.sidebar.slider("Bias (0 = 없음, 1 = 매우 큼)", 0.0, 1.0, 1.0, 0.01)
 min_n, max_n = 5, 100
 
-t = 1- (bias / 0.1)
+t = 1- (bias / 1.0)
 n = int( min_n * (max_n/min_n)**t )
 
 # ---------------------
